@@ -37,7 +37,10 @@
     "prettier": "prettier \"**/*.{css,html,js,json,md,scss,ts,yaml}\" --write",
     "swiftlint": "node-swiftlint",
     "docgen": "docgen --api BackgroundLocationPermissionPlugin --output-readme README.md --output-json dist/docs.json",
-    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
+    "build": "npm run clean && tsc && rollup -c rollup.config.js",
+    "build:docs": "npm run docgen",
+    "build:ios": "npm run build && echo 'iOS plugin files are in ios/ directory'",
+    "build:android": "npm run build && echo 'Android plugin files are in android/ directory'",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
@@ -45,7 +48,7 @@
   "devDependencies": {
     "@capacitor/android": "^6.0.0",
     "@capacitor/core": "^6.0.0",
-    "@capacitor/docgen": "^0.0.25",
+    "@capacitor/docgen": "^0.3.1",
     "@capacitor/ios": "^6.0.0",
     "@ionic/eslint-config": "^0.3.0",
     "@types/node": "^20.11.0",
@@ -53,19 +56,20 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
     "prettier": "^3.2.5",
-    "prettier-plugin-swift": "^0.2.0",
     "rimraf": "^5.0.5",
     "rollup": "^4.9.0",
     "swiftlint": "^1.0.1",
     "typescript": "~5.3.3"
   },
   "peerDependencies": {
-    "@capacitor/core": "^6.0.0"
+    "@capacitor/core": "^5.0.0 || ^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@capacitor/core": {
+      "optional": false
+    }
   },
   "prettier": {
-    "plugins": [
-      "prettier-plugin-swift"
-    ],
     "arrowParens": "always",
     "printWidth": 100,
     "semi": true,

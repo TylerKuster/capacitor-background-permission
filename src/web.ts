@@ -7,7 +7,8 @@ export class BackgroundLocationPermissionWeb
   implements BackgroundLocationPermissionPlugin
 {
   async checkAndRequestPermission(): Promise<LocationPermissionStatus> {
-    throw this.unimplemented('Web platform is not supported.');
+    const errorMessage = 'PLATFORM_UNSUPPORTED: Web platform is not supported | Details: Background location permissions are not available on web platforms. This feature requires native iOS or Android capabilities.';
+    throw new Error(errorMessage);
   }
 }
 
