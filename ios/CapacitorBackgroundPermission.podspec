@@ -1,9 +1,9 @@
 require 'json'
 
-package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
+package = JSON.parse(File.read(File.join(__dir__, '..', 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name = 'BackgroundLocationPermission'
+  s.name = 'CapacitorBackgroundPermission'
   s.version = package['version']
   s.summary = 'Capacitor plugin for background location permissions'
   s.license = 'MIT'
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   
   s.post_install do |installer|
     installer.pods_project.targets.each do |target|
-      if target.name == 'BackgroundLocationPermission'
+      if target.name == 'CapacitorBackgroundPermission'
         check_info_plist_keys(installer)
       end
     end
@@ -56,14 +56,14 @@ def check_info_plist_keys(installer)
         end
       rescue => e
         # If we can't read the file, just warn about it
-        puts "\n⚠️  [BackgroundLocationPermission] Could not read Info.plist at #{path}"
+        puts "\n⚠️  [CapacitorBackgroundPermission] Could not read Info.plist at #{path}"
       end
       break
     end
   end
   
   if checked && missing_keys.any?
-    puts "\n⚠️  [BackgroundLocationPermission] WARNING: Missing required Info.plist keys:"
+    puts "\n⚠️  [CapacitorBackgroundPermission] WARNING: Missing required Info.plist keys:"
     missing_keys.each do |key|
       puts "   - #{key}"
     end
@@ -71,9 +71,9 @@ def check_info_plist_keys(installer)
     puts "   See README.md for instructions or run:"
     puts "   ruby ios/Plugin/add_info_plist_keys.rb\n"
   elsif checked
-    puts "\n✅ [BackgroundLocationPermission] All required Info.plist keys are present.\n"
+    puts "\n✅ [CapacitorBackgroundPermission] All required Info.plist keys are present.\n"
   else
-    puts "\n⚠️  [BackgroundLocationPermission] INFO: Could not locate Info.plist to verify keys."
+    puts "\n⚠️  [CapacitorBackgroundPermission] INFO: Could not locate Info.plist to verify keys."
     puts "   Please ensure the following keys are added to your Info.plist:"
     required_keys.each do |key|
       puts "   - #{key}"
