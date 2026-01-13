@@ -5,6 +5,26 @@ module.exports = [
   {
     input: 'src/index.ts',
     output: {
+      file: 'dist/plugin.js',
+      format: 'iife',
+      sourcemap: true,
+      name: 'BackgroundLocationPermission',
+      globals: {
+        '@capacitor/core': 'capacitorExports',
+      },
+      inlineDynamicImports: true,
+    },
+    external: ['@capacitor/core'],
+    plugins: [
+      typescript({
+        tsconfig: './tsconfig.json',
+      }),
+      nodeResolve(),
+    ],
+  },
+  {
+    input: 'src/index.ts',
+    output: {
       file: 'dist/plugin.cjs.js',
       format: 'cjs',
       sourcemap: true,
@@ -35,4 +55,3 @@ module.exports = [
     ],
   },
 ];
-
